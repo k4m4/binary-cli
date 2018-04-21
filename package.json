@@ -1,0 +1,42 @@
+{
+  "name": "binary-cli",
+  "version": "1.0.0",
+  "description": "Binary encode & decode a string, right from your terminal.",
+  "license": "MIT",
+  "repository": "k4m4/binary-cli",
+  "author": {
+    "name": "Nikolaos Kamarinakis",
+    "url": "https://nikolaskama.me",
+    "email": "nikolaskam@gmail.com"
+  },
+  "bin": {
+    "bin": "cli.js",
+    "binary": "cli.js"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "test": "ava"
+  },
+  "keywords": [
+    "bin",
+    "binary",
+    "encoder",
+    "decoder",
+    "bin2ascii",
+    "ascii2bin"
+  ],
+  "files": [
+    "cli.js"
+  ],
+  "devDependencies": {
+    "ava": "*",
+    "execa": "^0.10.0"
+  },
+  "dependencies": {
+    "get-stdin": "^6.0.0",
+    "log-symbols": "^2.2.0",
+    "meow": "^4.0.0"
+  }
+}
