@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-'use strict';
-const meow       = require('meow');
-const getStdin   = require('get-stdin');
-const logSymbols = require('log-symbols');
+'use strict'
+const meow       = require('meow')
+const getStdin   = require('get-stdin')
+const logSymbols = require('log-symbols')
 
 const cli = meow(`
 	Usage
@@ -29,21 +29,21 @@ const cli = meow(`
 			default: false
 		}
 	}
-});
+})
 
-const input = cli.input[0];
+const input = cli.input[0]
 
 function binEncode (text) {
 	var bin = ""
 	for (var i = 0; i < text.length; i++) {
-		bin += text[i].charCodeAt(0).toString(2) + " ";
+		bin += text[i].charCodeAt(0).toString(2) + " "
 	}
 	return bin
 }
 
 function binEncodedRegex (text) {
 	const re = '(?:[01]+)'
-	if (new RegExp(re, 'g').test(text)) return true;
+	if (new RegExp(re, 'g').test(text)) return true
 	else return false
 }
 
@@ -51,7 +51,7 @@ function binDecode (bin) {
 	if (binEncodedRegex(bin)) {
 		var ascii = ''
 		bin.replace(/[01]+/g, function (i) {
-			ascii += String.fromCharCode(parseInt(i, 2));
+			ascii += String.fromCharCode(parseInt(i, 2))
 		})
 		return ascii
 	}
@@ -64,27 +64,27 @@ function display (plaintext) {
 		console.log(leading + plaintext)
 	} else {
 		const leading = (cli.flags["plain"]) ? `` : `${logSymbols.error} `
-		console.log(leading + `Text doesn\'t seem to be binary-encoded`);
-		process.exit(1);
+		console.log(leading + `Text doesn\'t seem to be binary-encoded`)
+		process.exit(1)
 	}
 }
 
 if (!input && process.stdin.isTTY) {
-	console.log('Enter string to binary encode/decode');
-	process.exit(1);
+	console.log('Enter string to binary encode/decode')
+	process.exit(1)
 }
 if (input) {
 	if (cli.flags["decode"]) {
-		display(binDecode(input));
+		display(binDecode(input))
 	} else {
-		display(binEncode(input));
+		display(binEncode(input))
 	}
 } else {
 	getStdin().then(stdin => {
 		if (cli.flags["decode"]) {
-			display(binDecode(stdin));
+			display(binDecode(stdin))
 		} else {
-			display(binEncode(stdin));
+			display(binEncode(stdin))
 		}
 	})
 }
