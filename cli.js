@@ -34,11 +34,7 @@ const cli = meow(`
 const input = cli.input[0]
 
 function binEncode (text) {
-	var bin = ""
-	for (var i = 0; i < text.length; i++) {
-		bin += text[i].charCodeAt(0).toString(2) + " "
-	}
-	return bin
+	return text.split("").map(char => char.charCodeAt(0).toString(2)).join(" ")
 }
 
 function binEncodedRegex (text) {
