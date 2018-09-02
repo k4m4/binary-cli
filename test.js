@@ -3,10 +3,7 @@ import execa from 'execa'
 
 test('binary encoding', async t => {
 	const {stdout} = await execa('./cli.js', ['foobar'])
-	var bin = ''
-	for (var i = 0; i < 'foobar'.length; i++) {
-		bin += 'foobar'[i].charCodeAt(0).toString(2) + " "
-	}
+	const bin = 'foobar'.split("").map(char => char.charCodeAt(0).toString(2)).join(" ")
 	t.is(stdout, (`✔ ` + bin))
 })
 
