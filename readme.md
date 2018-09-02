@@ -20,6 +20,7 @@
     ~ ❯❯❯ echo [string] | bin
   Options
         -d, --decode  Decode binary-encoded string
+        -p, --plain   Display output without log symbols
   Examples
     ~ ❯❯❯ binary foo
     ✔ 1100110 1101111 1101111

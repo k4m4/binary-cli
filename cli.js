@@ -10,6 +10,7 @@ const cli = meow(`
 	  ~ ❯❯❯ echo [string] | bin -d
 	Options
 		-d, --decode  Decode binary-encoded string
+		-p, --plain   Display output without log symbols
 	Examples
 	  ~ ❯❯❯ binary foo
 	  ${logSymbols.success} 1100110 1101111 1101111
@@ -20,6 +21,11 @@ const cli = meow(`
 		decode: {
 			type: 'boolean',
 			alias: 'd',
+			default: false
+		},
+		plain: {
+			type: 'boolean',
+			alias: 'p',
 			default: false
 		}
 	}
@@ -54,9 +60,11 @@ function binDecode (bin) {
 
 function display (plaintext) {
 	if (plaintext != 'Text doesn\'t seem to be binary-encoded') {
-		console.log(`${logSymbols.success} ` + plaintext)
+		const leading = (cli.flags["plain"]) ? `` : `${logSymbols.success} `
+		console.log(leading + plaintext)
 	} else {
-		console.log(`${logSymbols.error} Text doesn\'t seem to be binary-encoded`);
+		const leading = (cli.flags["plain"]) ? `` : `${logSymbols.error} `
+		console.log(leading + `Text doesn\'t seem to be binary-encoded`);
 		process.exit(1);
 	}
 }
